@@ -12,9 +12,13 @@ import org.openqa.selenium.By;
  * Page Object главной страницы Яндекс Маркет
  */
 public class YandexMarketMainPage implements BasePageObject {
+
+  /* Xpath кнопки Каталог */
+  private static final String CATALOG_BUTTON_XPATH = "//div[@data-zone-name='catalog']";
+
   @Step("Перехожу в Каталог")
   public YandexMarketCatalogPage goCatalog() {
-    $x("//div[@data-zone-name='catalog']").click();
+    $x(CATALOG_BUTTON_XPATH).click();
     return page(YandexMarketCatalogPage.class);
   }
 }

@@ -3,18 +3,17 @@ package pages;
 import static com.codeborne.selenide.Selenide.*;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import helpers.Assertions;
 import io.qameta.allure.Step;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Page Object раздела Смартфоны
  */
 public class SmartphonesPage implements BasePageObject {
 
+  /* Xpath кнопки Показать ещё */
   private static final String SHOW_MORE_BUTTON_XPATH = "//span[text()=\"Показать ещё\"]";
 
   @Step("Убеждаемся, что перешли в раздел Смартфоны")
@@ -45,14 +44,16 @@ public class SmartphonesPage implements BasePageObject {
   public void checkFindResult(List<String> correctSearchResults) {
     goLastPage();
     List<String> allProductsTitle = $$x("//h3[@data-zone-name='title']").texts();
-    System.out.println("Size of products: " + allProductsTitle.size());
-    System.out.println("The first product is: " + allProductsTitle.get(0));
-    System.out.println("The last product is: " + allProductsTitle.get(allProductsTitle.size() - 1));
-
     Assertions.assertTrue(isResultCorrespond(allProductsTitle, correctSearchResults),
-        "");
+        "Список отфильтрованных товаров содержит производителя отличного от ожидаемого");
   }
 
+  /**
+   * Метод проверяет соответствие всех результатов поиска с ожидаемым списком брендов
+   *
+   * @param products             - список отфильтрованных товаров
+   * @param correctSearchResults - все возможные варианты названия брендов
+   */
   private boolean isResultCorrespond(List<String> products, List<String> correctSearchResults) {
     for (String product : products) {
       boolean isProductContainsResult = false;
@@ -74,13 +75,17 @@ public class SmartphonesPage implements BasePageObject {
   }
 
   @Step("Проходим на последнюю страницу выборки")
-  private SmartphonesPage goLastPage() {
+  private void goLastPage() {
     while (isNextPageExists()) {
       $x(SHOW_MORE_BUTTON_XPATH).click();
     }
-    return this;
   }
 
+  /**
+   * Метод проверяет имеется ли следующая страница с товарами.
+   *
+   * @return имеется ли на странице кнопка Показать ещё
+   */
   private boolean isNextPageExists() {
     return $x("//div[@data-zone-name='SearchPager']").has(Condition.editable) &&
         $x(SHOW_MORE_BUTTON_XPATH).exists();
