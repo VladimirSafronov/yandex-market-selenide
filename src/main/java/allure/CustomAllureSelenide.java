@@ -75,7 +75,6 @@ public class CustomAllureSelenide extends AllureSelenide {
 
   @Override
   public void afterEvent(final LogEvent event) {
-//    if (event.getStatus().equals(EventStatus.FAIL)) {
       lifecycle.getCurrentTestCaseOrStep().ifPresent(parentUuid -> {
         if (saveScreenshots) {
           getScreenshotBytes()
@@ -95,7 +94,6 @@ public class CustomAllureSelenide extends AllureSelenide {
               });
         }
       });
-//    }
 
     if (stepsShouldBeLogged(event)) {
       lifecycle.getCurrentTestCaseOrStep().ifPresent(parentUuid -> {
@@ -120,7 +118,6 @@ public class CustomAllureSelenide extends AllureSelenide {
   }
 
   private boolean stepsShouldBeLogged(final LogEvent event) {
-    //  other customer Loggers could be configured, they should be logged
     return includeSelenideLocatorsSteps || !(event instanceof SelenideLog);
   }
 }

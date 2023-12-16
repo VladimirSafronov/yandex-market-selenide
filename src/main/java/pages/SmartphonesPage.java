@@ -5,7 +5,6 @@ import static com.codeborne.selenide.Selenide.*;
 import com.codeborne.selenide.Condition;
 import helpers.Assertions;
 import io.qameta.allure.Step;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -58,7 +57,6 @@ public class SmartphonesPage implements BasePageObject {
     for (String product : products) {
       boolean isProductContainsResult = false;
       String[] productData = product.split(" ");
-      System.out.println("in isResultCorrespond() product: " + Arrays.toString(productData));
       for (String data : productData) {
         if (correctSearchResults.contains(data)) {
           isProductContainsResult = true;
