@@ -14,7 +14,7 @@ public class BaseTest {
 
   @BeforeEach
   public void option() {
-    Configuration.timeout = 6000;
+    Configuration.timeout = 12000;
     Configuration.browser = "chrome";
   }
 }

@@ -10,12 +10,9 @@ import io.qameta.allure.Step;
  */
 public class YandexMarketMainPage implements BasePageObject {
 
-  /* Xpath кнопки Каталог */
-  private static final String CATALOG_BUTTON_XPATH = "//div[@data-zone-name='catalog']";
-
-  @Step("Перехожу в Каталог")
-  public YandexMarketCatalogPage goCatalog() {
-    $x(CATALOG_BUTTON_XPATH).click();
-    return page(YandexMarketCatalogPage.class);
+  @Step("Перехожу в {buttonName}")
+  public <T extends BasePageObject> T clickButton(String buttonName, Class<T> typeNextPage) {
+    $x(String.format("//span[contains(text(), '%s')]", buttonName)).click();
+    return typeNextPage.cast(page(typeNextPage));
   }
 }
