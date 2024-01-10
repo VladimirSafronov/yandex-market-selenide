@@ -15,7 +15,8 @@ public class DataProvider {
         "iPhone");
 
     return Stream.of(Arguments.of(
-        "https://market.yandex.ru/", "Смартфоны — купить по низкой цене на Яндекс Маркете",
+        "https://market.yandex.ru/", "Каталог", "Электроника", "Смартфоны",
+        "Смартфоны — купить по низкой цене на Яндекс Маркете",
         brands, correctSearchResults
     ));
   }

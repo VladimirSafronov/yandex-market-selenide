@@ -7,7 +7,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.LogEvent;
-import com.codeborne.selenide.logevents.LogEvent.EventStatus;
 import com.codeborne.selenide.logevents.SelenideLog;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;

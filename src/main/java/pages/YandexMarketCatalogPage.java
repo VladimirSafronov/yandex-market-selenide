@@ -10,22 +10,15 @@ import io.qameta.allure.Step;
  */
 public class YandexMarketCatalogPage implements BasePageObject {
 
-  /* Xpath секции Электроника */
-  private static final String SECTION_ELECTRONIC_XPATH =
-      "//ul[@role='tablist']/li[@role='tab']/a/span[text()=\"Электроника\"]";
-
-  /* Xpath раздела Смартфоны */
-  private static final String SECTION_SMARTPHONE_XPATH = "//a[text()=\"Смартфоны\"]";
-
-  @Step("Наводим курсор на раздел Электроника")
-  public YandexMarketCatalogPage moveToElectronica() {
-    $x(SECTION_ELECTRONIC_XPATH).hover();
+  @Step("Наводим курсор на раздел {elementName}")
+  public YandexMarketCatalogPage moveToElement(String elementName) {
+    $x(String.format("//a[img]/span[text()='%s']", elementName)).hover();
     return this;
   }
 
-  @Step("Переходим в раздел \"Смартфоны\"")
-  public SmartphonesPage goToSmartphones() {
-    $x(SECTION_SMARTPHONE_XPATH).click();
-    return page(SmartphonesPage.class);
+  @Step("Переходим в раздел {sectionName}")
+  public <T extends BasePageObject> T goToSection(String sectionName, Class<T> typeNextPage) {
+    $x(String.format("//a[text()='%s']", sectionName)).click();
+    return typeNextPage.cast(page(typeNextPage));
   }
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import pages.SectionPage;
+import pages.YandexMarketCatalogPage;
 import pages.YandexMarketMainPage;
 
 public class YandexMarketTest extends BaseTest {
@@ -13,12 +15,12 @@ public class YandexMarketTest extends BaseTest {
   @DisplayName("Проверка результатов поиска c помощью PO")
   @ParameterizedTest(name = "{displayName} {arguments}")
   @MethodSource("helpers.DataProvider#providerCheckingSmartphones")
-  public void checkProducts(String url, String title,
-      List<String> brands, List<String> correctSearchResults) {
+  public void checkProducts(String url, String buttonName, String elementName, String sectionName,
+      String title, List<String> brands, List<String> correctSearchResults) {
     open(url, YandexMarketMainPage.class)
-        .goCatalog()
-        .moveToElectronica()
-        .goToSmartphones()
+        .clickButton(buttonName, YandexMarketCatalogPage.class)
+        .moveToElement(elementName)
+        .goToSection(sectionName, SectionPage.class)
         .checkPage(title)
         .chooseBrand(brands)
         .waitSearchResult()
